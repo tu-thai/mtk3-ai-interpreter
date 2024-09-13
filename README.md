@@ -24,41 +24,42 @@ development.
 
 ![µT-Kernel AI Interpreter PoC](uT-Kernel-AI-Interpreter.png)
 
-## Development environment
+## Demonstration
 
-### Hardware
+The person detection example application demonstrates how an application
+detects the presence of a person. The example application creates and
+synchronizes 3 µT-Kernel tasks:
 
-| Item          | Contents                                                                                                                                          |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Target board  | [Renesas EK-RA8M1](https://www.renesas.com/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/ek-ra8m1-evaluation-kit-ra8m1-mcu-group) |
-| Host computer | Windows 11 computer                                                                                                                               |
+* person_detection_input: This task loads images stored in ROM.
+* person_detection: This task detects the presence of a person in the loaded image.
+* person_detection_output: This task responses to the result of detection.
 
-### Software
+![Demonstration](./person-detection-demo.png)
 
-| Item      | Contents                                                                                              |
-| --------- | ----------------------------------------------------------------------------------------------------- |
-| IDE       | [e<sup>2</sup> studio](https://www.renesas.com/en/software-tool/e-studio) 2024-07                     |
-| Toolchain | [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) 13.2.1.arm-13-7 |
-| Terminal  | [J-Link RTT Viewer](https://www.segger.com/products/debug-probes/j-link/tools/rtt-viewer/) V7.96g     |
+The below images are stored in ROM and loaded alternatively.
 
-## Software dependencies
+| no-person                           | person                        |
+| ----------------------------------- | ----------------------------- |
+| ![no-person image](./no_person.bmp) | ![person image](./person.bmp) |
 
-| Item     | Contents                                                                                        |
-| -------- | ----------------------------------------------------------------------------------------------- |
-| Firmware | [Renesas RA FSP](https://www.renesas.com/en/software-tool/flexible-software-package-fsp) v5.3.0 |
-| Library  | [LiteRT for Microcontrollers](https://ai.google.dev/edge/litert/microcontrollers/overview)      |
-| RTOS     | [µT-Kernel 3.00](https://github.com/tron-forum/mtkernel_3)                                      |
+To run the person detection example app, import the below projects:
 
-## Folder structure
+* tflm: AI interpreter.
+* tflm_person_detection_mtk3: Example application.
 
-* `applications`: Example applications.
-* `mtk3_bsp2`: µT-Kernel and its system dependencies.
-* `projects`: e<sup>2</sup> studio projects.
-* `RA8M1`: RA8M1 specific.
-* `SEGGER_RTT`: SEGGER RTT specific.
-* `tflm`: LiteRT for Microcontrollers.
+Build and run the project tflm_person_detection_mtk3.
 
-## Clone the repository
+## Specifications
+
+* Refer [here](./docs/poc-specs.md).
+
+## Getting started
+
+### Setup the development environment
+
+* Refer [here](./docs/poc-specs.md#development-environment).
+
+### Clone the repository
 
 Run the command git clone.
 
@@ -72,9 +73,9 @@ If you downloaded the repository without using the `--recurse-submodules` argume
 git submodule update --init --recursive
 ```
 
-## Import projects to e<sup>2</sup> studio
+### Import projects to e² studio
 
-(1) Open e<sup>2</sup> studio.
+(1) Open e² studio.
 
 (2) Choose a workspace and click **Launch**.
 
@@ -88,7 +89,7 @@ git submodule update --init --recursive
 
 (7) Click **Finish** to import the projects.
 
-## Build and debug a project with e<sup>2</sup> studio
+### Build and debug a project with e² studio
 
 (1) Select a project to be debugged on the **Project Explorer** view. Click
 **Project** > **Build Project** to build the project.
@@ -98,11 +99,11 @@ git submodule update --init --recursive
 under the Renesas GDB Hardware Debugging group. Click **Debug** to start
 debugging the project.
 
-## Setup debugging
+### Setup debugging
 
 (1) Connect the host computer to the USB Debug Port (J10) on EK-RA8M1.
 
-(2) Launch e<sup>2</sup> studio.
+(2) Launch e² studio.
 
 (3) Select a project to be debugged on the **Project Explorer** view. Click
 **Project** > **Build Project** to build the project.
